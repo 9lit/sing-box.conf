@@ -34,4 +34,7 @@ sing-box run
 winsw.exe start sing-box.xml
 ~~~
 
-
+## 将机场订阅转换为 sing-box 订阅
+1. 没有服务器, 可以使用 开源项目 [sing-box-subscribe](https://github.com/Toperlock/sing-box-subscribe), 搭建到 vercel, 进行在线转换,或者搭建到服务器或者本地
+2. 使用 python 脚本进行订阅的转换, 本项目中的脚本暂时只支持转换 vless 协议
+   + 可以进行本地手动进行转换, 生成 sing-box 配置文件, 或者克隆到服务器, 使用定时器定时执行脚本文件, 并发布到线上
