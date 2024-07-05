@@ -136,10 +136,11 @@
     ],
     "rule_set": [
       {
-        "type": "local",
+        "type": "remote",
         "tag": "apnic_ipv4_cn",
         "format": "source",
-        "path": "C:\\Users\\lain\\.config\\winsw\\sing-box\\apnic_ipv4_cn.json"
+        "url": "http://text.1210923.xyz/sing-box/apnic_cn_ipv4.json",
+        "download_detour": "direct"
       },
       {
         "type": "remote",
