@@ -133,6 +133,11 @@ def update_sing_box_config(configs, template_config):
     set_outbounds_tag(); set_outbounds()
     return template_config
 
+def upload():
+    if not UPLOAD_FLAG: return
+    import os
+    os.system(f"cd {UPLOAD_PATH} && git pull && cp {OUT_CONFIG_PATH} {UPLOAD_PATH} && git add config.json && git commit -am '更新配置文件' && git push")
+
 def main():
 
     context = get_context(path=CONTEXT_PATH)
@@ -142,6 +147,7 @@ def main():
     template_config = update_sing_box_config(configs=config, template_config=template_config)
 
     write(template_config, path=OUT_CONFIG_PATH)
+    upload()
 
 
 if __name__ == "__main__":
