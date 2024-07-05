@@ -136,7 +136,7 @@ def update_sing_box_config(configs, template_config):
 def upload():
     if not UPLOAD_FLAG: return
     import os
-    os.system(f"cd {UPLOAD_PATH} && git pull && cp {OUT_CONFIG_PATH} {UPLOAD_PATH} && git add config.json && git commit -am '更新配置文件' && git push")
+    os.system(f"cd {UPLOAD_PATH} && git pull && cp {OUT_CONFIG_PATH} {UPLOAD_PATH}/sing-box/config.json && git add sing-box/config.json && git commit -am '更新配置文件' && git push")
 
 def main():
 
