@@ -1,8 +1,31 @@
-# sing-box 配置
+原始项目 [sing-box](https://sing-box.sagernet.org/zh/)
 
-1. 原始项目 [sing-box](https://sing-box.sagernet.org/zh/)
+### 编辑配置文件 config.json
 
-2. 使用 [windows](https://github.com/winsw/winsw) 中开机自启 sing-box
+直接编辑
+
+使用第三方软件进行转换
+1. [sing-box-subscribe](https://github.com/Toperlock/sing-box-subscribe)
+2. 使用自定义脚本进行转换
+
+2.1 使用 python 脚本进行转换
+执行下面的命令, 获取脚本文件. 编辑配置文件 config.json
+``` shell
+git clone https://github.com/9lit/sing-box.conf.git
+```
+
+2.2 使用 shell 脚本进行订阅转换
+
+``` shell
+curl http://text.1210923.xyz/text/sing-box/sub_sing-box.sh | bash
+```
+如果需要上传到 github 项目, 则需要传入项目在本地的地址, 并且具有推送权限
+
+``` shell
+curl http://text.1210923.xyz/text/sing-box/sub_sing-box.sh | bash -s your/path
+```
+
+### 使用 [winsw](https://github.com/winsw/winsw) 管理 sing-box 程序
 
 下载 [winsw](https://github.com/winsw/winsw/releases)
 
@@ -22,17 +45,8 @@
 </service>
 ```
 执行命令,启动 sing-box 后台服务
+> start | status | restart | stop
 
 ``` shell
 winsw.exe start sing-box.xml
 ```
-
-3. 将机场订阅转换为 sing-box 订阅
-
-+ 没有服务器, 可以使用 开源项目 [sing-box-subscribe](https://github.com/Toperlock/sing-box-subscribe), 搭建到 vercel, 进行在线转换,或者搭建到服务器或者本地
-+ 使用脚本进行转换, 定时执行上传到服务器或者本地文件夹
-
-3.1 使用 python 脚本进行订阅的转换, 本项目中的脚本暂时只支持转换 vless 协议
-
-3.2 使用 shell 脚本执行
-    
