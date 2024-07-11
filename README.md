@@ -4,8 +4,8 @@
 
 1.直接编辑, 查看配置[文档](https://sing-box.sagernet.org).  
 2.使用第三方软件进行转换  
-  1.[sing-box-subscribe](https://github.com/Toperlock/sing-box-subscribe).
-  2.使用自定义脚本进行转换.
+  1.[sing-box-subscribe](https://github.com/Toperlock/sing-box-subscribe).  
+  2.使用自定义脚本进行转换.  
 
 **使用自定义脚本进行转换** 
 1.使用 python 脚本进行转换  
