@@ -4,8 +4,10 @@
 
 2. 使用 [windows](https://github.com/winsw/winsw) 中开机自启 sing-box
 
-  + 下载 [winsw](https://github.com/winsw/winsw/releases)
-  + 新建并编辑 xml 文件 sing-box.xml (名称随意), 配置模板 [winsw.xml](https://github.com/winsw/winsw#sample-configuration-file)
+下载 [winsw](https://github.com/winsw/winsw/releases)
+
+新建并编辑 xml 文件 sing-box.xml (名称随意), 配置模板 [winsw.xml](https://github.com/winsw/winsw#sample-configuration-file)
+
 ```
 <service>
   <id>0</id>
@@ -19,7 +21,8 @@
   <onfailure action="restart" />
 </service>
 ```
-  + 执行命令,启动 sing-box 后台服务
+执行命令,启动 sing-box 后台服务
+
 ``` shell
 winsw.exe start sing-box.xml
 ```
