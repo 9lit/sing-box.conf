@@ -6,7 +6,7 @@
 
 + 下载 [winsw](https://github.com/winsw/winsw/releases)
 + 新建并编辑 xml 文件 sing-box.xml (名称随意), 配置模板 [winsw.xml](https://github.com/winsw/winsw#sample-configuration-file)
-~~~xml
+~~~
 <service>
   <id>0</id>
   <name>sing-box</name>
