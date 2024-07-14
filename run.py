@@ -1,5 +1,6 @@
 from base64 import b64decode
 import urllib
+import urllib.parse
 import urllib.request
 import json
 from config import *
@@ -34,8 +35,8 @@ def decode_context(context:str) -> list:
     return share_links
 
 
-def get_configs(share_links):
-    def set_vless_config(url):
+def get_configs(share_links, template_server):
+    def set_vless_config(url, template_server):
 
         def get_tag():
             tag = urllib.parse.unquote(url.fragment)
@@ -49,46 +50,26 @@ def get_configs(share_links):
 
             return tls_config
 
-
         uuid, server = url.netloc.split("@")    
         server, server_port = server.split(":")
-        if not server: return False
-        
+        if not server: return False  
         tls = get_tls_config()
 
-
-        return  {
-                "tag": get_tag(),
-                "server": server,
-                "server_port": int(server_port),
-                "uuid": uuid,
-                "type": url.scheme,
-                "packet_encoding": "xudp",
-                "tls":{
-                    "enabled": True,
-                    "insecure": False,
-                    "server_name": tls['sni'],
-                    "utls": {
-                        "enabled": True,
-                        "fingerprint": tls['fp'], 
-                    }
-                },
-                "transport": {
-                    "type": tls['type'],
-                    "path": urllib.parse.unquote(tls['path']),
-                    "headers": {
-                        "Host": tls['host']
-                    }
-                }
-                
-            }
+        template_server['tag'] = get_tag()
+        template_server['server'] = int(server_port)
+        template_server['uuid'] = uuid
+        template_server['type'] = url.scheme
+        template_server['tls']['server_name'] = tls['sni']
+        template_server['tls']['utls']['fingerprint'] = tls['fp']
+        template_server['transport']['type'] = tls['type']
+        template_server['transport']['path'] = urllib.parse.unquote(tls['path'])
+        template_server['transport']['headers']['Host'] = tls['host']
     
     def get_config(share_link):
         url = urllib.parse.urlsplit(share_link)
-        
-        config = set_vless_config(url)
 
-        return config if url.scheme == "vless" and config else False
+        if url.scheme == "vless": return set_vless_config(url, template_server['vless'])
+        else: return False
 
     return [get_config(share_link) for share_link in share_links if get_config(share_link)]
 
@@ -136,17 +117,18 @@ def update_sing_box_config(configs, template_config):
 def upload():
     if not UPLOAD_FLAG: return
     import os
-    os.system(f"cd {UPLOAD_PATH} && git pull && cp {OUT_CONFIG_PATH} {UPLOAD_PATH}/sing-box/config.json && git add sing-box/config.json && git commit -am '更新配置文件' && git push")
+    os.system(f"git pull && cp {OUT_CONFIG_PATH_BAK} {OUT_CONFIG_PATH} && git add . && git commit -am '更新订阅文件' && git push")
 
 def main():
 
     context = get_context(path=CONTEXT_PATH)
     share_links = decode_context(context)
-    config = get_configs(share_links); config = set_tag(config)
+    template_server = read(path=TEMPLATE_SERVER)
+    config = get_configs(share_links, template_server); config = set_tag(config)
     template_config = read(path=TEMPLATE_CONFIG_PATH)
     template_config = update_sing_box_config(configs=config, template_config=template_config)
 
-    write(template_config, path=OUT_CONFIG_PATH)
+    write(template_config, path=OUT_CONFIG_PATH_BAK)
     upload()
 
 

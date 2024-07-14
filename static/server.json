@@ -1,0 +1,28 @@
+{
+    "vless": {
+        "tag": "",
+        "server": "",
+        "server_port": "",
+        "uuid": "",
+        "type": "",
+        "packet_encoding": "xudp",
+        "tls":{
+            "enabled": true,
+            "insecure": false,
+            "server_name": "",
+            "utls": {
+                "enabled": true,
+                "fingerprint": "" 
+            }
+        },
+        "transport": {
+            "type": "",
+            "path": "",
+            "headers": {
+                "Host": ""
+            }
+        }
+        
+    }
+
+}
